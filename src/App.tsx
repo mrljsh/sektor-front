@@ -3,7 +3,7 @@ import styled from 'styled-components'
 function App() {
   return (
     <AppContainer>
-      <Header><h1>sektor44</h1></Header>
+      <Header><img src="/sektor44-logo.png" alt="Sektor44 logo" /></Header>
     </AppContainer>
   )
 }
@@ -15,7 +15,12 @@ const AppContainer = styled.div`
 
 const Header = styled.header`
   grid-area: navbar;
-  background-color: yellow;
+  display: flex;
+  align-items: center;
+  background-color: fff;
+  height: 64px;
+  box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.05);
+  padding: 10px 40px;
 `
 
 export default App
