@@ -61,11 +61,17 @@ const Members = () => {
 
   return (
     <MembersContainer>
-      Members
+      <Heading>Members</Heading>
       <Table data={data} />
     </MembersContainer>
   );
 };
+
+const Heading = styled.h1`
+  font-size: 2.5rem;
+  font-family: "Quicksand", sans-serif;
+  margin-bottom: 16px;
+`;
 
 const MembersContainer = styled.main`
   padding: 20px;
