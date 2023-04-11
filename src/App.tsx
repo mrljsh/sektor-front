@@ -1,30 +1,24 @@
-import { useState } from 'react'
+import styled from "styled-components";
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import Members from "./components/Members";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <AppContainer>
+      <Header />
+      <Sidebar />
+      <Members />
+    </AppContainer>
+  );
 }
 
-export default App
+const AppContainer = styled.div`
+  display: grid;
+  grid-template-areas: "navbar navbar navbar" "sidebar main main" "sidebar main main";
+  grid-template-rows: 64px auto auto;
+  grid-template-columns: 300px auto auto;
+  height: 100vh;
+`;
+
+export default App;
