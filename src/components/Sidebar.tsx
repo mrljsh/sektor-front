@@ -28,10 +28,17 @@ const Link = styled.a`
   padding: 16px;
   text-decoration: none;
   transition: 300ms ease;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
 
   &:hover {
     background-color: #ddd;
     color: #000;
+  }
+
+  &.active {
+    background-color: #ffd400;
   }
 `;
 
