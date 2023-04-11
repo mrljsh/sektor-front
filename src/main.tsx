@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   }
   
   html {
-    scroll-behavior:smooth
+    scroll-behavior:smooth; font-family: 'Montserrat', sans-serif;
   }
   
   a {
