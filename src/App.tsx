@@ -9,7 +9,7 @@ function App() {
         <Nav>
           <ul>
             <li>
-              <a href="#">POCETNA</a>
+              <a href="#">POČETNA</a>
             </li>
             <li>
               <a href="#">ODJAVI SE</a>
@@ -46,8 +46,8 @@ const Nav = styled.nav`
   & a {
     padding: 10px 20px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 0.8rem;
+    font-weight: 400;
     line-height: 1;
     letter-spacing: 0.05em;
     text-transform: uppercase;
