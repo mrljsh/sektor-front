@@ -5,7 +5,7 @@ const TablePagination = () => {
     <Container>
       <List>
         <PageButton>Prethodna</PageButton>
-        <PageNumbers>1</PageNumbers>
+        <PageNumbers className="active">1</PageNumbers>
         <PageNumbers>2</PageNumbers>
         <PageNumbers>3</PageNumbers>
         <PageNumbers>4</PageNumbers>
@@ -31,29 +31,44 @@ const List = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 3rem;
-  border-radius: 0.6rem;
-  background: #f2f2f2;
+  margin: 1rem;
   box-shadow: 0 0.8rem 2rem rgba(#5a6181, 0.05);
 
   > li {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0.8rem;
+    margin: 0.5rem;
     font-size: 1rem;
-    cursor: pointer;
   }
 `;
 
 const PageButton = styled.li`
-  display: inline-block;
+  color: #ffd400;
+  font-weight: 600;
+  cursor: pointer;
 `;
 
 const PageNumbers = styled.li`
-  display: inline-block;
+  cursor: pointer;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 0.4rem;
+  transition: 300ms ease-in-out;
+
+  &.active {
+    background-color: #ffd400;
+    font-weight: 600;
+  }
+
+  &:hover:not(.active) {
+    color: #ffd400;
+  }
 `;
 
 const PageDots = styled.li`
-  display: inline-block;
+  cursor: default;
+  width: 2.6rem;
+  height: 2.6rem;
+  color: #ffd400;
 `;
