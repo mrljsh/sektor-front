@@ -35,7 +35,7 @@ const AddUser = () => {
           required
         />
       </FormGroup>
-      <FormGroup>
+      <CheckboxGroup>
         <Label htmlFor="is-student">Student:</Label>
         <Checkbox
           type="checkbox"
@@ -44,7 +44,7 @@ const AddUser = () => {
           checked={student}
           onChange={(event) => setStudent(event.target.checked)}
         />
-      </FormGroup>
+      </CheckboxGroup>
       <SubmitButton type="submit">Submit</SubmitButton>
     </FormContainer>
   );
@@ -53,13 +53,23 @@ const AddUser = () => {
 const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
+  font-size: 1rem;
+`;
+
+const CheckboxGroup = styled.div`
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: auto 1em;
+  gap: 0.5em;
 `;
 
 const Label = styled.label`
@@ -71,13 +81,21 @@ const Input = styled.input`
   padding: 0.5rem;
   border-radius: 0.25rem;
   border: 1px solid #ccc;
+  font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   margin-bottom: 0.5rem;
   min-width: 400px;
 `;
 
 const Checkbox = styled.input`
-  margin-right: 0.5rem;
+  margin: 0;
+  font: inherit;
+  color: #ffd400;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid #ffd400;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
 `;
 
 const SubmitButton = styled.button`
@@ -89,6 +107,9 @@ const SubmitButton = styled.button`
   font-size: 1rem;
   cursor: pointer;
   transition: 300ms;
+
+  margin: 1rem;
+  align-self: center;
 
   &:hover {
     background-color: #ffdc2a;
