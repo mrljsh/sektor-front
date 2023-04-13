@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const Modal = ({ show, onClose, title, children }) => {
   if (!show) {
@@ -19,6 +19,20 @@ const Modal = ({ show, onClose, title, children }) => {
     </ModalContainer>
   );
 };
+
+const fadeInDown = keyframes`
+0% {
+  opacity: 0;
+  -webkit-transform: translate3d(0,-100%,0);
+  transform: translate3d(0,-100%,0);
+}
+
+100% {
+  opacity: 1;
+  -webkit-transform: none;
+  transform: none;
+}
+`;
 
 const ModalContainer = styled.div`
   position: fixed;
@@ -41,6 +55,7 @@ const ModalContent = styled.div`
   border: 1px solid #888;
   width: 80%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation: ${fadeInDown} 300ms;
 `;
 
 const CloseBtn = styled.button`
