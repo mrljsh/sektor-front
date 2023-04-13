@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import Table from "./Table";
+import { Modal } from "./Modal";
+import { useState } from "react";
+import AddUser from "./AddUser";
 
 const Members = () => {
   const data = [
@@ -59,10 +62,15 @@ const Members = () => {
     },
   ];
 
+  const [show, setShow] = useState(false);
+
   return (
     <MembersContainer>
       <Heading>Members</Heading>
-      <Button>+ Add member</Button>
+      <Button onClick={() => setShow(true)}>+ Add member</Button>
+      <Modal show={show} onClose={() => setShow(false)} title={"Add User"}>
+        <AddUser />
+      </Modal>
       <Table data={data} />
     </MembersContainer>
   );
