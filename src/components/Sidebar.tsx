@@ -1,15 +1,11 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const Sidebar = () => {
   return (
     <Aside>
-      <Link href="#dashboard" className="active">
-        Dashboard
-      </Link>
-      <Link href="#classes">Classes</Link>
-      <Link href="#members">Members</Link>
-      <Link href="#instructors">Instructors</Link>
-      <Link href="#billing">Billing</Link>
+      <Link to="/">Dashboard</Link>
+      <Link to="/users">Users</Link>
     </Aside>
   );
 };
@@ -22,7 +18,7 @@ const Aside = styled.aside`
   grid-area: sidebar;
 `;
 
-const Link = styled.a`
+const Link = styled(NavLink)`
   display: block;
   color: #000;
   padding: 16px;
