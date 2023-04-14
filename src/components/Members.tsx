@@ -66,8 +66,8 @@ const Members = () => {
 
   return (
     <MembersContainer>
-      <Heading>Members</Heading>
-      <Button onClick={() => setShow(true)}>+ Add member</Button>
+      <Heading>Users</Heading>
+      <Button onClick={() => setShow(true)}>+ Add user</Button>
       <Modal show={show} onClose={() => setShow(false)} title={"Add User"}>
         <AddUser />
       </Modal>
