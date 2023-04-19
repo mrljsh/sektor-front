@@ -52,6 +52,14 @@ const router = createBrowserRouter([
         path: "users",
         element: <Members />,
       },
+      {
+        path: "memberships",
+        element: <Members />,
+      },
+      {
+        path: "types",
+        element: <Members />,
+      },
     ],
   },
 ]);

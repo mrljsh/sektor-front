@@ -6,6 +6,8 @@ const Sidebar = () => {
     <Aside>
       <Link to="/">Dashboard</Link>
       <Link to="/users">Users</Link>
+      <Link to="/memberships">Memberships</Link>
+      <Link to="/types">Membership types</Link>
     </Aside>
   );
 };
@@ -31,6 +33,7 @@ const Link = styled(NavLink)`
   &:hover {
     background-color: #ddd;
     color: #000;
+    padding-left: 24px;
   }
 
   &.active {
