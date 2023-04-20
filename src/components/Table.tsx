@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import TablePagination from "./TablePagination";
 
-const Table = ({ data }) => {
+const Table = ({ data, currentPage, handlePageChange }) => {
   return (
     <Container>
       <TableContainer>
@@ -27,8 +27,9 @@ const Table = ({ data }) => {
         </tbody>
       </TableContainer>
       <TablePagination
-        currentPage={data["pagination"]["current_page"]}
+        currentPage={currentPage}
         maxPages={data["pagination"]["last_page"]}
+        handlePageChange={handlePageChange}
       />
     </Container>
   );

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const TablePagination = ({ currentPage, maxPages }) => {
+const TablePagination = ({ currentPage, maxPages, handlePageChange }) => {
   const MAX_VISIBLE_PAGES = 2;
 
   const getVisiblePages = () => {
@@ -8,7 +8,15 @@ const TablePagination = ({ currentPage, maxPages }) => {
 
     // Always show first two pages
     for (let i = 1; i <= Math.min(MAX_VISIBLE_PAGES, maxPages); i++) {
-      visiblePages.push(<PageNumbers key={i}>{i}</PageNumbers>);
+      visiblePages.push(
+        <PageNumbers
+          key={i}
+          onClick={() => handlePageChange(i)}
+          className={`${i === currentPage ? "active" : ""}`}
+        >
+          {i}
+        </PageNumbers>
+      );
     }
 
     // Add dots if needed before currentPage
@@ -23,7 +31,11 @@ const TablePagination = ({ currentPage, maxPages }) => {
       i++
     ) {
       visiblePages.push(
-        <PageNumbers key={i} className={`${i === currentPage ? "active" : ""}`}>
+        <PageNumbers
+          key={i}
+          className={`${i === currentPage ? "active" : ""}`}
+          onClick={() => handlePageChange(i)}
+        >
           {i}
         </PageNumbers>
       );
@@ -40,7 +52,11 @@ const TablePagination = ({ currentPage, maxPages }) => {
       i <= maxPages;
       i++
     ) {
-      visiblePages.push(<PageNumbers key={i}>{i}</PageNumbers>);
+      visiblePages.push(
+        <PageNumbers key={i} onClick={() => handlePageChange(i)}>
+          {i}
+        </PageNumbers>
+      );
     }
 
     return visiblePages;
@@ -49,9 +65,25 @@ const TablePagination = ({ currentPage, maxPages }) => {
   return (
     <Container>
       <List>
-        <PreviousButton page={currentPage}>Previous</PreviousButton>
+        <PreviousButton
+          page={currentPage}
+          onClick={() => {
+            if (currentPage === 1) return;
+            handlePageChange(currentPage - 1);
+          }}
+        >
+          Previous
+        </PreviousButton>
         {getVisiblePages()}
-        <NextButton ifLastPage={currentPage === maxPages}>Next</NextButton>
+        <NextButton
+          ifLastPage={currentPage === maxPages}
+          onClick={() => {
+            if (currentPage === maxPages) return;
+            handlePageChange(currentPage + 1);
+          }}
+        >
+          Next
+        </NextButton>
       </List>
     </Container>
   );

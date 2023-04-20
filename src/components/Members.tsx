@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Table from "./Table";
+import { useState } from "react";
 
 const Members = () => {
   const data = {
@@ -62,15 +63,21 @@ const Members = () => {
     pagination: {
       total: 100,
       per_page: 10,
-      current_page: 5,
+      current_page: 1,
       last_page: 10,
     },
   };
 
+  const [currentPage, setCurrentPage] = useState(1);
+
   return (
     <MembersContainer>
       <Heading>Members</Heading>
-      <Table data={data} />
+      <Table
+        data={data}
+        currentPage={currentPage}
+        handlePageChange={(number) => setCurrentPage(number)}
+      />
     </MembersContainer>
   );
 };
