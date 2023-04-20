@@ -1,17 +1,89 @@
 import styled from "styled-components";
 
-const TablePagination = () => {
+const TablePagination = ({ currentPage, maxPages, handlePageChange }) => {
+  const MAX_VISIBLE_PAGES = 2;
+
+  const getVisiblePages = () => {
+    const visiblePages = [];
+
+    // Always show first two pages
+    for (let i = 1; i <= Math.min(MAX_VISIBLE_PAGES, maxPages); i++) {
+      visiblePages.push(
+        <PageNumbers
+          key={i}
+          onClick={() => handlePageChange(i)}
+          className={`${i === currentPage ? "active" : ""}`}
+        >
+          {i}
+        </PageNumbers>
+      );
+    }
+
+    // Add dots if needed before currentPage
+    if (currentPage > MAX_VISIBLE_PAGES + 1) {
+      visiblePages.push(<PageDots>...</PageDots>);
+    }
+
+    // Add currentPage - 1, currentPage, and currentPage + 1 (if applicable)
+    for (
+      let i = Math.max(currentPage - 1, MAX_VISIBLE_PAGES + 1);
+      i <= Math.min(currentPage + 1, maxPages);
+      i++
+    ) {
+      visiblePages.push(
+        <PageNumbers
+          key={i}
+          className={`${i === currentPage ? "active" : ""}`}
+          onClick={() => handlePageChange(i)}
+        >
+          {i}
+        </PageNumbers>
+      );
+    }
+
+    // Add dots if needed before last two pages
+    if (currentPage < maxPages - MAX_VISIBLE_PAGES) {
+      visiblePages.push(<PageDots>...</PageDots>);
+    }
+
+    // Always show last two pages (if applicable)
+    for (
+      let i = Math.max(maxPages - MAX_VISIBLE_PAGES + 1, currentPage + 2);
+      i <= maxPages;
+      i++
+    ) {
+      visiblePages.push(
+        <PageNumbers key={i} onClick={() => handlePageChange(i)}>
+          {i}
+        </PageNumbers>
+      );
+    }
+
+    return visiblePages;
+  };
+
   return (
     <Container>
       <List>
-        <PageButton>Prethodna</PageButton>
-        <PageNumbers className="active">1</PageNumbers>
-        <PageNumbers>2</PageNumbers>
-        <PageNumbers>3</PageNumbers>
-        <PageNumbers>4</PageNumbers>
-        <PageDots>...</PageDots>
-        <PageNumbers>10</PageNumbers>
-        <PageButton>Sledeca</PageButton>
+        <PreviousButton
+          page={currentPage}
+          onClick={() => {
+            if (currentPage === 1) return;
+            handlePageChange(currentPage - 1);
+          }}
+        >
+          Previous
+        </PreviousButton>
+        {getVisiblePages()}
+        <NextButton
+          ifLastPage={currentPage === maxPages}
+          onClick={() => {
+            if (currentPage === maxPages) return;
+            handlePageChange(currentPage + 1);
+          }}
+        >
+          Next
+        </NextButton>
       </List>
     </Container>
   );
@@ -47,6 +119,16 @@ const PageButton = styled.li`
   color: #ffd400;
   font-weight: 600;
   cursor: pointer;
+`;
+
+const PreviousButton = styled(PageButton)`
+  color: ${(props) => (props.page === 1 ? "gray" : "#ffd400")};
+  cursor: ${(props) => (props.page === 1 ? "default" : "pointer")};
+`;
+
+const NextButton = styled(PageButton)`
+  color: ${(props) => (props.ifLastPage ? "gray" : "#ffd400")};
+  cursor: ${(props) => (props.ifLastPage ? "default" : "pointer")};
 `;
 
 const PageNumbers = styled.li`

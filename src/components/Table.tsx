@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import TablePagination from "./TablePagination";
 
-const Table = ({ data }) => {
+const Table = ({ data, currentPage, handlePageChange }) => {
   return (
     <Container>
       <TableContainer>
@@ -15,7 +15,7 @@ const Table = ({ data }) => {
           </tr>
         </Thead>
         <tbody>
-          {data.map((item) => (
+          {data["data"].map((item) => (
             <Row key={item.id}>
               <td>{item.id}</td>
               <td>{item.firstName + " " + item.lastName}</td>
@@ -26,7 +26,11 @@ const Table = ({ data }) => {
           ))}
         </tbody>
       </TableContainer>
-      <TablePagination />
+      <TablePagination
+        currentPage={currentPage}
+        maxPages={data["pagination"]["last_page"]}
+        handlePageChange={handlePageChange}
+      />
     </Container>
   );
 };
