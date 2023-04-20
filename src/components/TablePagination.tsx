@@ -22,7 +22,11 @@ const TablePagination = ({ currentPage, maxPages }) => {
       i <= Math.min(currentPage + 1, maxPages);
       i++
     ) {
-      visiblePages.push(<PageNumbers key={i}>{i}</PageNumbers>);
+      visiblePages.push(
+        <PageNumbers key={i} className={`${i === currentPage ? "active" : ""}`}>
+          {i}
+        </PageNumbers>
+      );
     }
 
     // Add dots if needed before last two pages
