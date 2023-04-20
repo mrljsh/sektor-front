@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
-import Members from "./components/Members";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
     <AppContainer>
       <Header />
       <Sidebar />
-      <Members />
+      <Outlet />
     </AppContainer>
   );
 }
