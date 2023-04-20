@@ -62,7 +62,7 @@ const Members = () => {
     pagination: {
       total: 100,
       per_page: 10,
-      current_page: 1,
+      current_page: 10,
       last_page: 10,
     },
   };
