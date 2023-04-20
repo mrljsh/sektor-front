@@ -4,14 +4,14 @@ const TablePagination = () => {
   return (
     <Container>
       <List>
-        <PageButton>Prethodna</PageButton>
+        <PageButton>Previous</PageButton>
         <PageNumbers className="active">1</PageNumbers>
         <PageNumbers>2</PageNumbers>
         <PageNumbers>3</PageNumbers>
         <PageNumbers>4</PageNumbers>
         <PageDots>...</PageDots>
         <PageNumbers>10</PageNumbers>
-        <PageButton>Sledeca</PageButton>
+        <PageButton>Next</PageButton>
       </List>
     </Container>
   );
