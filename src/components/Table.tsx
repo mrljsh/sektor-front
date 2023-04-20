@@ -15,7 +15,7 @@ const Table = ({ data }) => {
           </tr>
         </Thead>
         <tbody>
-          {data.map((item) => (
+          {data["data"].map((item) => (
             <Row key={item.id}>
               <td>{item.id}</td>
               <td>{item.firstName + " " + item.lastName}</td>
@@ -26,7 +26,10 @@ const Table = ({ data }) => {
           ))}
         </tbody>
       </TableContainer>
-      <TablePagination />
+      <TablePagination
+        currentPage={data["pagination"]["current_page"]}
+        maxPages={data["pagination"]["last_page"]}
+      />
     </Container>
   );
 };
