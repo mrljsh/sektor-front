@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import Table from "./Table";
-import { useState } from "react";
 import { Modal } from "./Modal";
 import { useState } from "react";
 import AddUser from "./AddUser";
-
 
 const Members = () => {
   const data = {
@@ -37,7 +35,7 @@ const Members = () => {
         isActive: false,
       },
       {
-        id: 2,
+        id: 5,
         firstName: "Nikola",
         lastName: "Nikolic",
         email: "nikolicn@gmail.com",
@@ -46,7 +44,7 @@ const Members = () => {
         isActive: false,
       },
       {
-        id: 3,
+        id: 6,
         firstName: "Marko",
         lastName: "Markovic",
         email: "marecare@yahoo.com",
@@ -55,7 +53,7 @@ const Members = () => {
         isActive: false,
       },
       {
-        id: 4,
+        id: 7,
         firstName: "Ivana",
         lastName: "Ivanovic",
         email: "ivana@ivanovic.com",
