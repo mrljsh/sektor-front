@@ -1,6 +1,21 @@
 import styled, { keyframes } from "styled-components";
+import { useEffect } from "react";
 
 const Modal = ({ show, onClose, title, children }) => {
+  useEffect(() => {
+    const close = (e) => {
+      if (e.keyCode === 27) {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", close);
+
+    return () => {
+      window.removeEventListener("keydown", close);
+    };
+  }, [onClose]);
+
   if (!show) {
     return null;
   }
