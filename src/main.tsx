@@ -4,6 +4,9 @@ import App from "./App";
 import { createGlobalStyle } from "styled-components";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Members from "./components/Members";
+import Login from "./components/Login";
+import { ProtectedRoute } from "./utils/ProtectedRoute";
+import { AuthProvider } from "./utils/AuthProvider";
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -46,7 +49,7 @@ const GlobalStyle = createGlobalStyle`
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <ProtectedRoute element={<App />} />,
     children: [
       {
         path: "users",
@@ -62,11 +65,15 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/login",
+    element: <Login />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
+  <AuthProvider>
     <GlobalStyle />
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </AuthProvider>
 );
