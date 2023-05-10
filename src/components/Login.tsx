@@ -1,14 +1,37 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
 
 const Login: FC = () => {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const handleUserChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setUsername(e.target.value);
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setPassword(e.target.value);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(username, password);
+  };
+
   return (
     <Container>
       <img src="/sektor44-logo.png" alt="Sektor44 logo" />
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <p>Login</p>
-        <Input type="text" placeholder="Username" />
-        <Input type="password" placeholder="Password" />
+        <Input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={handleUserChange}
+        />
+        <Input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={handlePasswordChange}
+        />
         <Button type="submit">Log in</Button>
       </Form>
     </Container>
