@@ -1,12 +1,20 @@
-async function fetchData(): Promise<string> {
+async function postAuth(values: {
+  username: string;
+  password: string;
+}): Promise<string> {
   const response = await fetch(
     "https://sektor-api.azurewebsites.net/authentication/authenticate",
     {
       method: "POST",
-      body: JSON.stringify({ username: "stefanjovicevic", password: "stefan" }),
+      body: JSON.stringify(values),
       headers: { Accept: "*/*", "Content-Type": "application/json" },
     }
   );
+
+  if (response.status === 401) {
+    throw new Error("Wrong username/password!");
+  }
+
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
@@ -18,4 +26,4 @@ async function fetchData(): Promise<string> {
   return result;
 }
 
-export default fetchData;
+export default postAuth;

@@ -36,7 +36,7 @@ export const AuthProvider: FC<Props> = ({ children }) => {
   };
 
   // Expose token and auth functions through context
-  const authContextValue = {
+  const authContextValue: AuthContextType = {
     token,
     updateToken,
     clearToken,
