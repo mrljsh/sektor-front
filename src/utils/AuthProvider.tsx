@@ -10,7 +10,11 @@ type Props = {
   children?: ReactNode;
 };
 
-export const AuthContext = createContext<AuthContextType | null>(null);
+export const AuthContext = createContext<AuthContextType>({
+  token: null,
+  updateToken: () => {},
+  clearToken: () => {},
+});
 
 export const AuthProvider: FC<Props> = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
