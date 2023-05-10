@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useContext } from "react";
 import { AuthContext } from "../utils/AuthProvider";
@@ -13,6 +13,12 @@ const Login: FC = () => {
 
   const auth = useContext(AuthContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (auth?.token) {
+      navigate("/");
+    }
+  }, [auth?.token, navigate]);
 
   const handleChangeToken = (token: string) => {
     auth?.updateToken(token);
@@ -35,7 +41,6 @@ const Login: FC = () => {
 
     if (typeof token === "string") {
       handleChangeToken(await token);
-      navigate("/");
     }
 
     setLoading(false);
@@ -115,6 +120,11 @@ const Button = styled.button`
 
   &:hover {
     background-color: #ffbb00;
+  }
+
+  &:disabled {
+    background-color: #d4d4d4;
+    cursor: default;
   }
 `;
 
