@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Members from "./components/Members";
 import Login from "./components/Login";
 import { ProtectedRoute } from "./utils/ProtectedRoute";
+import { AuthProvider } from "./utils/AuthProvider";
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -71,8 +72,8 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
+  <AuthProvider>
     <GlobalStyle />
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </AuthProvider>
 );

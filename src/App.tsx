@@ -2,17 +2,14 @@ import styled from "styled-components";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import { Outlet } from "react-router-dom";
-import { AuthProvider } from "./utils/AuthProvider";
 
 function App() {
   return (
-    <AuthProvider>
-      <AppContainer>
-        <Header />
-        <Sidebar />
-        <Outlet />
-      </AppContainer>
-    </AuthProvider>
+    <AppContainer>
+      <Header />
+      <Sidebar />
+      <Outlet />
+    </AppContainer>
   );
 }
 
