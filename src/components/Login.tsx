@@ -3,12 +3,20 @@ import styled from "styled-components";
 import { useContext } from "react";
 import { AuthContext } from "../utils/AuthProvider";
 import postAuth from "../utils/Auth";
+import { useNavigate } from "react-router-dom";
 
 const Login: FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleChangeToken = (token: string) => {
+    auth?.updateToken(token);
+  };
 
   const handleUserChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setUsername(e.target.value);
@@ -19,11 +27,17 @@ const Login: FC = () => {
     e.preventDefault();
     setErrorMessage("");
     setLoading(true);
+
     const token = await postAuth({
       username: username,
       password: password,
     }).catch((err) => setErrorMessage(err.message));
-    console.log(await token);
+
+    if (typeof token === "string") {
+      handleChangeToken(await token);
+      navigate("/");
+    }
+
     setLoading(false);
   };
 
