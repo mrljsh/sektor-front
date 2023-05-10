@@ -1,18 +1,30 @@
 import { FC, useState } from "react";
 import styled from "styled-components";
+import { useContext } from "react";
+import { AuthContext } from "../utils/AuthProvider";
+import postAuth from "../utils/Auth";
 
 const Login: FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleUserChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setUsername(e.target.value);
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setPassword(e.target.value);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(username, password);
+    setErrorMessage("");
+    setLoading(true);
+    const token = await postAuth({
+      username: username,
+      password: password,
+    }).catch((err) => setErrorMessage(err.message));
+    console.log(await token);
+    setLoading(false);
   };
 
   return (
@@ -25,14 +37,19 @@ const Login: FC = () => {
           placeholder="Username"
           value={username}
           onChange={handleUserChange}
+          required
         />
         <Input
           type="password"
           placeholder="Password"
           value={password}
           onChange={handlePasswordChange}
+          required
         />
-        <Button type="submit">Log in</Button>
+        <Button type="submit" disabled={loading}>
+          {loading ? "Loading..." : "Log in"}
+        </Button>
+        <ErrSpan>{errorMessage}</ErrSpan>
       </Form>
     </Container>
   );
@@ -80,8 +97,13 @@ const Button = styled.button`
   color: white;
   padding: 1rem;
   transition: 300ms ease-in-out;
+  margin-bottom: 10px;
 
   &:hover {
     background-color: #ffbb00;
   }
+`;
+
+const ErrSpan = styled.span`
+  color: red;
 `;
