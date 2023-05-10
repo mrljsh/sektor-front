@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { useState, useEffect, FC, ReactNode, createContext } from "react";
+import { useCookies } from "react-cookie";
 
 interface AuthContextType {
   token: string | null;
@@ -18,24 +20,22 @@ export const AuthContext = createContext<AuthContextType>({
 
 export const AuthProvider: FC<Props> = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 
   // Retrieve token from local storage on mount
   useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    if (storedToken) {
-      setToken(storedToken);
-    }
-  }, []);
+    setToken(cookies.token || null);
+  }, [cookies]);
 
   // Update token in local storage and state
   const updateToken = (newToken: string) => {
-    localStorage.setItem("token", newToken);
+    setCookie("token", newToken);
     setToken(newToken);
   };
 
   // Remove token from local storage and state
   const clearToken = () => {
-    localStorage.removeItem("token");
+    removeCookie("token");
     setToken(null);
   };
 
