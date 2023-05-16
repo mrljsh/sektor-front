@@ -1,78 +1,27 @@
 import styled from "styled-components";
 import Table from "./Table";
 import { Modal } from "./Modal";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AddUser from "./AddUser";
+import { getUsers } from "../utils/Client";
+import { AuthContext } from "../utils/AuthProvider";
 
 const Members = () => {
-  const data = {
-    data: [
-      {
-        id: 2,
-        firstName: "Nikola",
-        lastName: "Nikolic",
-        email: "nikolicn@gmail.com",
-        student: true,
-        createdAt: "0001-01-01T00:00:00",
-        isActive: false,
-      },
-      {
-        id: 3,
-        firstName: "Marko",
-        lastName: "Markovic",
-        email: "marecare@yahoo.com",
-        student: false,
-        createdAt: "0001-01-01T00:00:00",
-        isActive: false,
-      },
-      {
-        id: 4,
-        firstName: "Ivana",
-        lastName: "Ivanovic",
-        email: "ivana@ivanovic.com",
-        student: true,
-        createdAt: "0001-01-01T00:00:00",
-        isActive: false,
-      },
-      {
-        id: 5,
-        firstName: "Nikola",
-        lastName: "Nikolic",
-        email: "nikolicn@gmail.com",
-        student: true,
-        createdAt: "0001-01-01T00:00:00",
-        isActive: false,
-      },
-      {
-        id: 6,
-        firstName: "Marko",
-        lastName: "Markovic",
-        email: "marecare@yahoo.com",
-        student: false,
-        createdAt: "0001-01-01T00:00:00",
-        isActive: false,
-      },
-      {
-        id: 7,
-        firstName: "Ivana",
-        lastName: "Ivanovic",
-        email: "ivana@ivanovic.com",
-        student: true,
-        createdAt: "0001-01-01T00:00:00",
-        isActive: false,
-      },
-    ],
-    pagination: {
-      total: 100,
-      per_page: 10,
-      current_page: 1,
-      last_page: 10,
-    },
-  };
+  const [data, setData] = useState(null);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [show, setShow] = useState<boolean>(false);
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const auth = useContext(AuthContext);
 
-  const [show, setShow] = useState(false);
+  useEffect(() => {
+    (async () => {
+      const response = await getUsers(
+        `?pageNumber=${currentPage}`,
+        auth?.token
+      );
+      setData(JSON.parse(await response));
+    })();
+  }, [currentPage, auth]);
 
   return (
     <MembersContainer>
@@ -81,11 +30,13 @@ const Members = () => {
       <Modal show={show} onClose={() => setShow(false)} title={"Add User"}>
         <AddUser />
       </Modal>
-      <Table
-        data={data}
-        currentPage={currentPage}
-        handlePageChange={(number) => setCurrentPage(number)}
-      />
+      {data !== null && (
+        <Table
+          data={data}
+          currentPage={currentPage}
+          handlePageChange={(number: number) => setCurrentPage(number)}
+        />
+      )}
     </MembersContainer>
   );
 };
